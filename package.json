@@ -1,0 +1,33 @@
+{
+  "name": "nodebb-plugin-sso-steam-2",
+  "version": "1.0.0",
+  "author": "Amir Al-Mohamad <aamohamad0001@gmail.com>",
+  "description": "NodeBB Steam SSO",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amir-al-mohamad/nodebb-plugin-sso-steam-2.git"
+  },
+  "main": "library.js",
+  "keywords": [
+    "nodebb",
+    "plugin",
+    "steam",
+    "sso",
+    "single sign on",
+    "registration"
+  ],
+  "license": "MIT",
+  "readme": "",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "eslint-config-nodebb": "0.1.1",
+    "passport-steam": "^1.0.18"
+  },
+  "nbbpm": {
+    "compatibility": "^3.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.x",
+    "eslint-plugin-import": "2.x"
+  }
+}

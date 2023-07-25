@@ -1,0 +1,20 @@
+{
+  "sign-in-with-steam": "Login with Steam",
+  "sign-up-with-steam": "Register with Steam",
+  "admin.title": "Steam SSO",
+  "admin.quick-start.title": "Quick start",
+  "admin.quick-start.doamin": "Add domain via",
+  "admin.quick-start.manager": "API Manager",
+  "admin.quick-start.screen": "You will be shown a screen with your <strong>API key</strong>.",
+  "admin.quick-start.values": "You can set these values in two ways",
+  "admin.quick-start.environment": "Use environment variables",
+  "admin.quick-start.form": "Use the form below (this behavior overrides environment variables)",
+  "admin.quick-start.restart": "Save and restart NodeBB via the ACP toolbar.",
+  "admin.api-key": "API key",
+  "admin.sign-up-disable": "Disable user registration via Steam",
+  "admin.sign-up-disable-info": "Registration restriction means that only registered users can associate their account with this single sign-on policy. This limitation is useful if you have users bypassing registration controls using social media accounts, or if you want to use NodeBB's registration queue.",
+  "admin.prevent-deauth": "Disable the ability to unlink a Steam account",
+  "admin.prevent-deauth-info": "Disable the ability to unlink a Steam account.",
+  "admin.alert.save-success-title": "Settings have been saved",
+  "admin.alert.save-success": "Please rebuild and restart NodeBB to apply these settings, or click on this warning to do so."
+}
