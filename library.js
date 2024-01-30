@@ -70,51 +70,59 @@
 	};
 
 	Steam.getStrategy = function (strategies, callback) {
-		if (Steam.settings.key) {
-			passport.use(new passportSteam({
-				apiKey: Steam.settings.key,
-				returnURL: `${nconf.get('url')}/auth/steam/callback`,
-				realm: nconf.get('url'),
-				passReqToCallback: true,
-			}, ((req, _identifier, profile, done) => {
-				if (req.hasOwnProperty('user') && req.user.hasOwnProperty('uid') && req.user.uid > 0) {
-					// Save Steam-specific information to the user
-					User.setUserField(req.user.uid, 'steamid', profile.id);
-					db.setObjectField('steamid:uid', profile.id, req.user.uid);
-					return done(null, req.user);
-				}
+		meta.settings.get('sso-steam', (_, loadedSettings) => {
+			if (loadedSettings.key) {
+				Steam.settings.key = loadedSettings.key;
+			}
+			Steam.settings.disableRegistration = loadedSettings.disableRegistration === 'on';
+			Steam.settings.preventDeauth = loadedSettings.preventDeauth === 'on';
 
-				Steam.login(profile.id, profile.displayName, profile._json.avatarfull, (err, user) => {
-					if (err) {
-						return done(err);
+			if (Steam.settings.key) {
+				passport.use(new passportSteam({
+					apiKey: Steam.settings.key,
+					returnURL: `${nconf.get('url')}/auth/steam/callback`,
+					realm: nconf.get('url'),
+					passReqToCallback: true,
+				}, ((req, _identifier, profile, done) => {
+					if (req.hasOwnProperty('user') && req.user.hasOwnProperty('uid') && req.user.uid > 0) {
+						// Save Steam-specific information to the user
+						User.setUserField(req.user.uid, 'steamid', profile.id);
+						db.setObjectField('steamid:uid', profile.id, req.user.uid);
+						return done(null, req.user);
 					}
-
-					authenticationController.onSuccessfulLogin(req, user.uid, (err) => {
-						done(err, !err ? user : null);
+	
+					Steam.login(profile.id, profile.displayName, profile._json.avatarfull, (err, user) => {
+						if (err) {
+							return done(err);
+						}
+	
+						authenticationController.onSuccessfulLogin(req, user.uid, (err) => {
+							done(err, !err ? user : null);
+						});
 					});
+				})));
+	
+				strategies.push({
+					name: 'steam',
+					url: '/auth/steam',
+					callbackURL: '/auth/steam/callback',
+					checkState: false,
+					icon: constants.admin.icon,
+					icons: {
+						normal: 'fa-brands fa-steam',
+						square: 'fa-brands fa-steam-square'
+					},
+					labels: {
+						login: '[[sso-steam:sign-in-with-steam]]',
+						register: '[[sso-steam:sign-up-with-steam]]'
+					},
+					color: '#66c0f4',
+					scope: ''
 				});
-			})));
-
-			strategies.push({
-				name: 'steam',
-				url: '/auth/steam',
-				callbackURL: '/auth/steam/callback',
-				checkState: false,
-				icon: constants.admin.icon,
-				icons: {
-					normal: 'fa-brands fa-steam',
-					square: 'fa-brands fa-steam-square'
-				},
-				labels: {
-					login: '[[sso-steam:sign-in-with-steam]]',
-					register: '[[sso-steam:sign-up-with-steam]]'
-				},
-				color: '#66c0f4',
-				scope: ''
-			});
-		}
-
-		callback(null, strategies);
+			}
+	
+			callback(null, strategies);
+		});
 	};
 
 	Steam.appendUserHashWhitelist = function (data, callback) {

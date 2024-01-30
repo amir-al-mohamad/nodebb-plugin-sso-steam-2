@@ -1,13 +1,12 @@
 {
   "name": "nodebb-plugin-sso-steam-2",
-  "version": "1.0.0",
-  "author": "Amir Al-Mohamad <aamohamad0001@gmail.com>",
+  "version": "1.0.1",
   "description": "NodeBB Steam SSO",
+  "main": "library.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/amir-al-mohamad/nodebb-plugin-sso-steam-2.git"
   },
-  "main": "library.js",
   "keywords": [
     "nodebb",
     "plugin",
@@ -16,7 +15,14 @@
     "single sign on",
     "registration"
   ],
+  "author": {
+    "name": "Amir Al-Mohamad",
+    "email": "aamohamad0001@gmail.com"
+  },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amir-al-mohamad/nodebb-plugin-sso-steam-2/issues"
+  },
   "readme": "",
   "readmeFilename": "README.md",
   "dependencies": {

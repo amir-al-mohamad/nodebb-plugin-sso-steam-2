@@ -2,6 +2,7 @@
 	"id": "nodebb-plugin-sso-steam-2",
 	"name": "NodeBB Steam SSO",
 	"description": "NodeBB Plugin that allows users to login/register via their Steam account.",
+	"url": "https://github.com/amir-al-mohamad/nodebb-plugin-sso-steam-2",
 	"library": "./library.js",
 	"templates": "templates",
 	"languages": "languages",
